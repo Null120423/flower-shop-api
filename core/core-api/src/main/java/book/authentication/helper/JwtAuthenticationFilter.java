@@ -10,12 +10,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -54,18 +56,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String userId = jwtService.extractUserId(token);
-        Optional<UserEntity> found = userService.findById(userId);
+        //optional
+//        Optional<UserEntity> found = userService.findById(userId);
 
-        if (found.isEmpty()) {
-            sendErrorResponse(response, ErrorType.USER_NOT_FOUND);
-            return;
-        }
+//        if (found.isEmpty()) {
+//            sendErrorResponse(response, ErrorType.USER_NOT_FOUND);
+//            return;
+//        }
+        // needed check user id match with action
         // set Authentication cho SecurityContext
         UsernamePasswordAuthenticationToken authToken =
                 new UsernamePasswordAuthenticationToken(
-                        found.get(),
-                        null
-//                        found.get().getAuthorities()
+                        userId,
+                        null,
+                        List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))
+
                 );
         authToken.setDetails(
                 new WebAuthenticationDetailsSource().buildDetails(request)
@@ -79,7 +84,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         response.setStatus(error.getStatus().value()); // vd: 401, 404
         response.setContentType("application/json;charset=UTF-8");
         // Convert ApiResponse -> JSON
-        ApiResponse<?> apiResponse = ApiResponse.error(error);
+        ApiResponse<?> apiResponse = ApiResponse.fail(error);
         String json = new com.fasterxml.jackson.databind.ObjectMapper()
                 .writeValueAsString(apiResponse);
         response.getWriter().write(json);

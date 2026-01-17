@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EntityScan(basePackages = "io.dodn.springboot.storage.db.core")
-@EnableJpaRepositories(basePackages = "io.dodn.springboot.storage.db.core")
-class CoreJpaConfig {
+@EntityScan(basePackages = "book.storage.db.core.entity")
+@EnableJpaRepositories(basePackages = "book.storage.db.core.repository")
+public class CoreJpaConfig {
 
 }

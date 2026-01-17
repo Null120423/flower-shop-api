@@ -1,48 +1,82 @@
 package book.core.support.response;
 
-import book.core.support.error.ErrorMessage;
 import book.core.support.error.ErrorType;
 
-public class ApiResponse<S> {
+public class ApiResponse<T> {
 
     private final ResultType result;
+    private final T data;
+    private final Integer status;
+    private final String message;
 
-    private final S data;
-
-    private final ErrorMessage error;
-
-    private ApiResponse(ResultType result, S data, ErrorMessage error) {
+    private ApiResponse(ResultType result, T data, Integer status, String message) {
         this.result = result;
         this.data = data;
-        this.error = error;
+        this.status = status;
+        this.message = message;
     }
 
-    public static ApiResponse<?> success() {
-        return new ApiResponse<>(ResultType.SUCCESS, null, null);
+    /* =====================
+       SUCCESS
+       ===================== */
+
+    public static <T> ApiResponse<T> ok(T data) {
+        return new ApiResponse<>(
+                ResultType.SUCCESS,
+                data,
+                null,
+                null
+        );
     }
 
-    public static <S> ApiResponse<S> success(S data) {
-        return new ApiResponse<>(ResultType.SUCCESS, data, null);
+    public static ApiResponse<Void> ok() {
+        return new ApiResponse<>(
+                ResultType.SUCCESS,
+                null,
+                null,
+                null
+        );
     }
 
-    public static ApiResponse<?> error(ErrorType error) {
-        return new ApiResponse<>(ResultType.ERROR, null, new ErrorMessage(error));
+    /* =====================
+       ERROR (ONLY status + message)
+       ===================== */
+
+    public static <T> ApiResponse<T> fail(ErrorType errorType) {
+        return new ApiResponse<>(
+                ResultType.ERROR,
+                null,
+                errorType.getStatus().value(),
+                errorType.getMessage()
+        );
     }
 
-    public static ApiResponse<?> error(ErrorType error, Object errorData) {
-        return new ApiResponse<>(ResultType.ERROR, null, new ErrorMessage(error, errorData));
+    public static <T> ApiResponse<T> fail(ErrorType errorType, String message) {
+        return new ApiResponse<>(
+                ResultType.ERROR,
+                null,
+                errorType.getStatus().value(),
+                message
+        );
     }
+
+    /* =====================
+       GETTERS
+       ===================== */
 
     public ResultType getResult() {
         return result;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public ErrorMessage getError() {
-        return error;
+    public Integer getStatus() {
+        return status;
     }
 
+    public String getMessage() {
+        return message;
+    }
 }

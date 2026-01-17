@@ -2,6 +2,11 @@ package book.storage.db.core.entity;
 
 import book.core.enums.AuthProvider;
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(
@@ -10,8 +15,15 @@ import jakarta.persistence.*;
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email"),
                 @UniqueConstraint(columnNames = {"provider", "providerId"})
+        },
+        indexes = {
+                @Index(name = "idx_users_username", columnList = "username"),
+                @Index(name = "idx_users_email", columnList = "email"),
+                @Index(name = "idx_users_provider_providerId", columnList = "provider,providerId")
         }
 )
+@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 public class UserEntity extends BaseEntity {
     @Column(length = 50)
     private String username;
@@ -41,6 +53,14 @@ public class UserEntity extends BaseEntity {
 
     @Column(nullable = false)
     private boolean enabled = true;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<RoleEntity> roles = new HashSet<>();
 
     /* ===== Constructors ===== */
 
@@ -85,6 +105,14 @@ public class UserEntity extends BaseEntity {
 
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public Set<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
     }
 
     public void setUsername(String username) {

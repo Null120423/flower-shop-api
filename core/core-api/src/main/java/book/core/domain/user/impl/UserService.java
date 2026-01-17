@@ -6,7 +6,10 @@ import book.storage.db.core.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+
+import java.rmi.server.UID;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService implements IUserService {
@@ -16,6 +19,6 @@ public class UserService implements IUserService {
     }
     @Override
     public Optional<UserEntity> findById(String userId) {
-        return userRepo.findById(userId);
+        return userRepo.findById(UUID.fromString(userId));
     }
 }

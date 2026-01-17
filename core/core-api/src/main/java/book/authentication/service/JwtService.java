@@ -11,7 +11,7 @@ import java.util.Date;
 public class JwtService {
 
     private static final String SECRET =
-            "HIHI";
+            "N0Y8Xq8m2K3TqZ+v8Y4XfZ9Xb1v8sK2ZK7P2mZ8Q==";
 
     private static final long EXPIRATION = 1000 * 60 * 60;
     private static final long REF_EXPIRATION = 1000 * 60 * 60;

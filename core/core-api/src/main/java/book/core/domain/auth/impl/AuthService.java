@@ -27,15 +27,15 @@ public class AuthService implements IAuthService {
     @Override
     public Optional<LoginResponseDto> login(LoginRequestDto data) {
         Optional<UserEntity> userOpt = userRepo.findByEmail(data.getEmail());
-        if (userOpt.isEmpty()) return Optional.empty();
-
-        UserEntity user = userOpt.get();
-        String passwordEn = passwordEncoder.encode(data.getPassword());
-        if (!user.getPassword().equals(passwordEn)) {
-            return Optional.empty();
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("User not found");
         }
-
+        UserEntity user = userOpt.get();
+        if (!passwordEncoder.matches(data.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Wrong password");
+        }
         // password đúng → tạo JWT
+        user.setPassword("");
         String accessToken = jwtService.generateToken(user.getId().toString());
         String refreshToken = jwtService.genRefreshToken(user.getId().toString());
 
@@ -54,17 +54,17 @@ public class AuthService implements IAuthService {
     public Optional<String> register(RegisterRequestDto data) {
         // 1. Validate email
         if (data.getEmail() == null || data.getEmail().isEmpty()) {
-            return Optional.of("Email is required");
+            throw new RuntimeException("Email is empty");
         }
 
         // 2. Validate password
         if (data.getPassword() == null || data.getPassword().isEmpty()) {
-            return Optional.of("Password is required");
+            throw new RuntimeException("Password is empty");
         }
 
         // 3. Check if email already exists
         if (userRepo.existsByEmail(data.getEmail())) {
-            return Optional.of("Email is already registered");
+            throw new RuntimeException("Email already in use");
         }
 
         // 4. Encode password
