@@ -1,60 +1,71 @@
-# compiled output
-/dist
-/node_modules
-/build
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
 
-# Logs
-logs
+### IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+# Compiled class files
+*.class
+
+# Log files
 *.log
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
 
-# OS
-.DS_Store
+# BlueJ files
+*.ctxt
 
-# Tests
-/coverage
-/.nyc_output
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-# IDEs and editors
-/.idea
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Eclipse
+*.pydevproject
 .project
 .classpath
-.c9/
-*.launch
 .settings/
-*.sublime-workspace
+bin/
+tmp/
 
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# NetBeans
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
 
-# dotenv environment variable files
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
 
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
+# Gradle
+.gradle/
 
-# temp directory
-.temp
-.tmp
+# VS Code
+.vscode/
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+# Temporary files
+*.swp
+*~
+*.tmp
 
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-deploy.yml
+# OS specific
+.DS_Store
+Thumbs.db
 
 
-.env
+application-live.yml
+application-local-dev.yml

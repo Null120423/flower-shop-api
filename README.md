@@ -1,244 +1,146 @@
-```md
-# Hodos Hackathon
+# SpringBoot Java Template
 
-## Backend API
+[//]: # This is the template for java spring --- My clone to optimize for personal use()
 
-### Installation
+[//]: # I'm keep licence in this source
 
-First, install the dependencies:
+[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fgeminikims)](https://twitter.com/geminikims)
+[![Youtube](https://img.shields.io/youtube/channel/views/UCDh8zEDofOcrOMAOnSVL9Tg?label=Youtube&style=social)](https://www.youtube.com/@geminikims)
+[![CI](https://github.com/team-dodn/spring-boot-java-template/actions/workflows/ci.yml/badge.svg)](https://github.com/team-dodn/spring-boot-java-template/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 
-```bash
-cd Backend/API
-yarn install
-```
+This is not the best structure. This is a good basic structure to use early in the project when productivity is important.
 
-### Running the App
+Remember, as your software grows, your structure must grow too.
 
-#### Development Mode
+# **Modules**
 
-To run the app in development mode with hot-reloading:
+## Core
+Each submodule of this module is responsible for one domain service.
 
-```bash
-yarn run start:dev
-```
+This must make the modular structure grow with the growth of the service.
 
-#### Production Mode
+### core:core-api
+It is the only executable module in the project. It is structured to have domains to maximize initial development productivity.
 
-To run the app in production mode:
+It is also responsible for providing APIs and setting up frameworks for services.
 
-```bash
-yarn run start:prod
-```
+### core:core-enum
 
-#### Debug Mode
+This module contains enums that are used by `core-api` and must be delivered to external modules.
 
-To run the app in debug mode:
+<br/>
 
-```bash
-yarn run start:debug
-```
+## Clients
+Submodules of this module are responsible for integrating with external systems.
 
-### Environment Variables
+### clients:clients-example
+This module shows an example of HTTP communication with `Spring-Cloud-Open-Feign`.
 
-Make sure to set up your `.env` file with the necessary environment variables. Here is an example:
+<br/>
 
-```properties
-APP_NAME='hodoshackathon'
-PORT='3000'
-ENV='development'
-NODE_ENV='development'
-DB_HOST='103.216.117.115'
-DB_PORT='3306'
-DB_USERNAME='root'
-DB_PASSWORD='gennydev@123'
-DB_DATABASE='hodoshackathon'
-DB_LOGGING='false'
-JWT_SECRET='hello'
-JWT_EXPIRY='24h'
-MODEL_API_LINK='http://103.216.117.115:3005'
-GEMINI_API_KEY='AIzaSyCZBg2Jr7v0EMkugfmEoA9ujyU52S_nVKA'
-```
+## Storage
+Submodules of this module are responsible for integrating with the various storages.
 
-### Building the App
+### storage:db-core
+This module shows an example of connecting to `MySql` using `Spring-Data-JPA`.
 
-To build the app:
-
-```bash
-yarn run build
-```
-
-### Testing
-
-#### Unit Tests
-
-To run unit tests:
-
-```bash
-yarn run test
-```
-
-#### End-to-End Tests
-
-To run end-to-end tests:
-
-```bash
-yarn run test:e2e
-```
-
-#### Test Coverage
-
-To generate test coverage reports:
-
-```bash
-yarn run test:cov
-```
-
-### Docker
-
-To run the app using Docker, you can use the provided Dockerfile.
-
-#### Build Docker Image
-
-```bash
-docker build -t hodos-hackathon-api .
-```
-
-#### Run Docker Container
-
-```bash
-docker run -p 3000:3000 hodos-hackathon-api
-```
-
-## Front End Mobile App
-
-### Prerequisites
-
-- Node.js (version 14.x or higher)
-- npm (version 6.x or higher) or yarn (version 1.x or higher)
-- Expo CLI
-- Android Studio (for Android development)
-- Xcode (for iOS development)
-
-### Setup
-
-1. **Clone the repository:**
-
-    ```sh
-    git clone git@github.com:Tran-Huu-Tai-12-04-23/hodos-hackathon.git
-    cd Front-end
-    ```
-
-2. **Install dependencies:**
-
-    Using npm:
-    ```sh
-    npm install
-    ```
-
-    Using yarn:
-    ```sh
-    yarn install
-    ```
-
-3. **Set up environment variables:**
-
-    Create a `.env` file in the root directory and add the necessary environment variables. You can use the `.env.example` file as a reference.
-
-### Running the Project
-
-#### Running on iOS
-
-1. **Start the Expo development server:**
-
-    ```sh
-    npm run start
-    ```
-
-2. **Run the iOS app:**
-
-    For development:
-    ```sh
-    npm run local:ios
-    ```
-
-    For production:
-    ```sh
-    npm run ios
-    ```
-
-#### Running on Android
-
-1. **Start the Expo development server:**
-
-    ```sh
-    npm run start
-    ```
-
-2. **Run the Android app:**
-
-    For development:
-    ```sh
-    npm run local:android
-    ```
-
-    For production:
-    ```sh
-    npm run android
-    ```
-
-### Building for Distribution
-
-#### iOS
-
-To build the iOS app for distribution, run:
-
-```sh
-npm run distribution:ios
-```
-
-#### Android
-
-To build the Android app for distribution, run:
-
-```sh
-npm run distribution:android
-```
-
-## Model_API_Swim
-
-### Prerequisites
-- Docker installed on your system. If you don't have Docker installed, please follow the official Docker installation guide for your operating system: [Get Docker](https://docs.docker.com/get-docker/)
-
-### Building and Running the Docker Image
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/Model_API_Swim.git
-   cd Backend/Model-API
-   ```
-
-2. Build the Docker image:
-   ```bash
-   docker build -t model-api-swim .
-   ```
-
-3. Run the Docker container:
-   ```bash
-   docker run -p 8000:8000 model-api-swim
-   ```
-
-   This command will start the container and map port 8000 from the container to port 8000 on your host machine.
-
-4. Access the application by opening a web browser and navigating to:
-   ```bash
-   http://localhost:8000
-   ```
+<br/>
 
 ## Support
+Submodules of this module are responsible for additional support.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### support:logging
+This module supports logging of service and has a dependency added for distributed tracing support.
 
-## License
+It also includes dependencies to support `Sentry`.
 
-Nest is [MIT licensed](LICENSE).
-```# flower-shop-api
+### support:monitoring
+This module supports monitoring of services.
+
+<br/>
+
+## Tests
+Submodules of this module are responsible for the convenience of writing test codes.
+
+### tests:api-docs
+This module is for writing spring-rest-docs conveniently.
+
+<br/>
+
+# Dependency Management
+All dependency versioning is done through `gradle.properties` file.
+
+If you want to add a new dependency, put the version in `gradle.properties` and load it in `build.gradle`.
+
+<br/>
+
+# Runtime Profiles
+
+## local
+This profile aims to configure an environment that can be developed even if the network is disconnected.
+
+## local-dev
+This profile aims configurations that allow me to connect to the DEV environment from my local machine.
+
+## dev
+This profile exists for deploying Development environments.
+
+## staging
+This profile exists for deploying Staging environments.
+
+## live
+This profile exists for deploying Live environments.
+
+<br/>
+
+# Test Tasks & Tags
+
+## test
+This is a collection of test-tasks that we want to run on `CI`.
+
+If you want to change the settings, modify the `build.gradle` file.
+
+## unitTest
+This is a group of tests that typically have no dependencies, are fast to run, and test a single feature.
+
+## contextTest
+This is a task that runs with SpringContext and has integration tests.
+
+## restDocsTest
+This is a task to create asciidoc based on spring-rest-docs.
+
+## developTest
+This is a task of tests that should not be run in `CI`.
+
+This is a good tag to use if you're not good at writing tests.
+
+<br/>
+
+# Recommended Preferences
+
+## Git Hook
+This setting makes run `lint` on every commit.
+
+```
+$ git config core.hookspath .githooks
+```
+
+## IntelliJ IDEA
+This setting makes it easier to run the `test code` out of the box.
+
+```
+// Gradle Build and run with IntelliJ IDEA
+Build, Execution, Deployment > Build Tools > Gradle > Run tests using > IntelliJ IDEA	
+```
+
+If you want to apply lint settings to the format of IDEA, please refer to the guide below.
+
+[Spring Java Format IntelliJ IDEA](https://github.com/spring-io/spring-javaformat#intellij-idea)
+
+---
+
+# Supported By
+<div align="center"><a href="https://jb.gg/OpenSourceSupport"><img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo (Main) logo." width="240"></a></div>
+# java-template
+# java-template
