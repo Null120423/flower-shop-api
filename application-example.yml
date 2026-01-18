@@ -1,0 +1,6 @@
+storage:
+  database:
+    core-db:
+      url: host:port/database-name
+      username: @@@@@
+      password: @@@@@

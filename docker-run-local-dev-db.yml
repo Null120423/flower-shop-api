@@ -1,0 +1,35 @@
+version: "3.9"
+
+#run in mac os
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+
+    ports:
+      - "3307:3306"   # Mac/Host dùng 3307, container vẫn là 3306
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: book_app
+      MYSQL_USER: book_user
+      MYSQL_PASSWORD: 123456
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+
+    networks:
+      - app_net
+
+volumes:
+  mysql_data:
+
+networks:
+  app_net:
+    driver: bridge

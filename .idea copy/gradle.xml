@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="homebrew-21" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/clients" />
+            <option value="$PROJECT_DIR$/clients/client-example" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/core-api" />
+            <option value="$PROJECT_DIR$/core/core-enum" />
+            <option value="$PROJECT_DIR$/storage" />
+            <option value="$PROJECT_DIR$/storage/db-core" />
+            <option value="$PROJECT_DIR$/support" />
+            <option value="$PROJECT_DIR$/support/logging" />
+            <option value="$PROJECT_DIR$/support/monitoring" />
+            <option value="$PROJECT_DIR$/tests" />
+            <option value="$PROJECT_DIR$/tests/api-docs" />
+          </set>
+        </option>
+        <option name="resolveExternalAnnotations" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/core-auth" />
+        <option name="gradleJvm" value="homebrew-21" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/core-auth" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+    <option name="parallelModelFetch" value="true" />
+  </component>
+</project>
