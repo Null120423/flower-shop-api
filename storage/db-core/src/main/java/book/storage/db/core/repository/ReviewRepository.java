@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,6 +23,7 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, UUID> {
     List<ReviewEntity> findByProductAndStatus(ProductEntity product, ReviewStatus status);
     List<ReviewEntity> findByUser(UserEntity user);
     List<ReviewEntity> findByStatus(ReviewStatus status);
+    Page<ReviewEntity> findByStatus(ReviewStatus status, Pageable pageable);
     boolean existsByUserAndProduct(UserEntity user, ProductEntity product);
     
     @Query("SELECT AVG(r.rating) FROM ReviewEntity r WHERE r.product.id = :productId AND r.status = 'APPROVED'")

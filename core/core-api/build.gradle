@@ -28,5 +28,8 @@ dependencies {
 
     // ✅ Validation (CHỈ CẦN CÁI NÀY)
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Swagger/OpenAPI
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6'
 }
 

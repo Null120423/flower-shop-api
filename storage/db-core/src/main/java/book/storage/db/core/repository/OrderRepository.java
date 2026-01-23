@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,8 +18,11 @@ import book.storage.db.core.entity.UserEntity;
 public interface OrderRepository extends JpaRepository<OrderEntity, UUID> {
     List<OrderEntity> findByUser(UserEntity user);
     List<OrderEntity> findByUserId(UUID userId);
+    Page<OrderEntity> findByUserId(UUID userId, Pageable pageable);
     List<OrderEntity> findByUserAndStatus(UserEntity user, OrderStatus status);
     List<OrderEntity> findByStatus(OrderStatus status);
+    Page<OrderEntity> findByStatus(OrderStatus status, Pageable pageable);
+    Long countByStatus(OrderStatus status);
     
     @Query("SELECT o FROM OrderEntity o WHERE o.createdAt BETWEEN :startDate AND :endDate")
     List<OrderEntity> findByDateRange(LocalDateTime startDate, LocalDateTime endDate);

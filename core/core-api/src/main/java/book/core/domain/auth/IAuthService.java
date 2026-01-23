@@ -1,10 +1,9 @@
 package book.core.domain.auth;
 
 
-import book.core.api.controller.v1.user.authentication.request.LoginRequestDto;
-import book.core.api.controller.v1.user.authentication.request.RegisterRequestDto;
-import book.core.api.controller.v1.user.authentication.response.LoginResponseDto;
-import book.storage.db.core.entity.UserEntity;
+import book.core.api.controller.v1.authentication.request.LoginRequestDto;
+import book.core.api.controller.v1.authentication.request.RegisterRequestDto;
+import book.core.api.controller.v1.authentication.response.LoginResponseDto;
 
 import java.util.Optional;
 

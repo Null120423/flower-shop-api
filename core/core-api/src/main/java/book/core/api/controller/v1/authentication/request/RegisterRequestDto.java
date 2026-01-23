@@ -1,4 +1,4 @@
-package book.core.api.controller.v1.user.authentication.request;
+package book.core.api.controller.v1.authentication.request;
 
 
 import jakarta.validation.constraints.Email;

@@ -1,27 +1,14 @@
 package book.core.api.controller.v1;
 
-import static book.test.api.RestDocsUtils.requestPreprocessor;
-import static book.test.api.RestDocsUtils.responsePreprocessor;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 
-import book.core.api.controller.v1.user.authentication.request.RegisterRequestDto;
 import book.test.api.RestDocsTest;
-import io.restassured.http.ContentType;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
-import org.springframework.restdocs.payload.JsonFieldType;
 
 public class ExampleControllerTest extends RestDocsTest {
 

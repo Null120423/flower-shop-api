@@ -1,9 +1,9 @@
-package book.core.api.controller.v1.user.authentication;
+package book.core.api.controller.v1.authentication;
 
 import book.core.api.controller.v1.user.UserV1Controller;
-import book.core.api.controller.v1.user.authentication.request.LoginRequestDto;
-import book.core.api.controller.v1.user.authentication.request.RegisterRequestDto;
-import book.core.api.controller.v1.user.authentication.response.LoginResponseDto;
+import book.core.api.controller.v1.authentication.request.LoginRequestDto;
+import book.core.api.controller.v1.authentication.request.RegisterRequestDto;
+import book.core.api.controller.v1.authentication.response.LoginResponseDto;
 import book.core.domain.auth.impl.AuthService;
 import book.core.support.error.ErrorType;
 import book.core.support.response.ApiResponse;

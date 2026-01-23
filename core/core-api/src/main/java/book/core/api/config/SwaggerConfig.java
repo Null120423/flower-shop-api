@@ -1,0 +1,44 @@
+package book.core.api.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+
+/**
+ * Swagger/OpenAPI Configuration for Flower Shop Admin API
+ * 
+ * Access the API documentation at: http://localhost:8080/swagger-ui.html
+ * API spec JSON: http://localhost:8080/v3/api-docs
+ */
+@Configuration
+public class SwaggerConfig {
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("🌸 Flower Shop Admin API")
+                        .version("1.0.0")
+                        .description("Comprehensive admin API for managing flower shop operations including products, inventory, orders, promotions, reviews, and analytics.")
+                        .contact(new Contact()
+                                .name("Flower Shop Team")
+                                .email("admin@flowershop.local")
+                                .url("https://flowershop.local"))
+                        .license(new License()
+                                .name("Apache 2.0")
+                                .url("https://www.apache.org/licenses/LICENSE-2.0.html")))
+                .addSecurityItem(new SecurityRequirement().addList("bearer-jwt"))
+                .components(new io.swagger.v3.oas.models.Components()
+                        .addSecuritySchemes("bearer-jwt", new SecurityScheme()
+                                .type(SecurityScheme.Type.HTTP)
+                                .scheme("bearer")
+                                .bearerFormat("JWT")
+                                .description("JWT Authentication token")));
+    }
+}

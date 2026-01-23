@@ -1,20 +1,24 @@
 package book.core.domain.auth.impl;
 
-import book.authentication.service.JwtService;
-import book.core.api.controller.v1.user.authentication.request.LoginRequestDto;
-import book.core.api.controller.v1.user.authentication.request.RegisterRequestDto;
-import book.core.api.controller.v1.user.authentication.response.LoginResponseDto;
-import book.core.domain.auth.IAuthService;
-import book.core.enums.AuthProvider;
-import book.storage.db.core.entity.UserEntity;
-import book.storage.db.core.repository.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import book.authentication.service.JwtService;
+import book.core.api.controller.v1.authentication.request.LoginRequestDto;
+import book.core.api.controller.v1.authentication.request.RegisterRequestDto;
+import book.core.api.controller.v1.authentication.response.LoginResponseDto;
+import book.core.api.controller.v1.authentication.response.UserInfoDto;
+import book.core.domain.auth.IAuthService;
+import book.core.enums.AuthProvider;
+import book.storage.db.core.entity.RoleEntity;
+import book.storage.db.core.entity.UserEntity;
+import book.storage.db.core.repository.UserRepository;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
@@ -39,8 +43,22 @@ public class AuthService implements IAuthService {
         String accessToken = jwtService.generateToken(user.getId().toString());
         String refreshToken = jwtService.genRefreshToken(user.getId().toString());
 
+        List<RoleEntity> roles = userRepo.findRolesByUserId(user.getId());
+        Set<String> roleNames = roles.stream()
+            .map(role -> role.getName())
+            .collect(Collectors.toSet());
+
+        UserInfoDto userInfo = UserInfoDto.builder()
+            .id(user.getId())
+            .username(user.getUsername())
+            .email(user.getEmail())
+            .enabled(user.isEnabled())
+            .provider(user.getProvider())
+            .roles(roleNames)
+            .build();
+
         LoginResponseDto response = LoginResponseDto.builder()
-                .userInfo(user)
+            .userInfo(userInfo)
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .expiresIn(3600L)

@@ -9,6 +9,8 @@ spring:
       - db-core.yml
       - client-example.yml
   web.resources.add-mappings: false
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   tomcat:
